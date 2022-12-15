@@ -44,7 +44,7 @@ const prompt: PromptModule = inquirer.createPromptModule();
 
 function successLog(options: Options): void {
   console.log(chalk.greenBright(`Project successfully generated!\n`));
-  console.log(chalk.blueBright(options));
+  console.log(options);
 }
 
 /**
