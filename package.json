@@ -1,0 +1,38 @@
+{
+  "name": "nodestrap",
+  "version": "1.0.0",
+  "description": "bootstrap javascript/typescript project template generator",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Oscar Yang Guang Zhu <ozhu35@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/ejs": "^3.1.1",
+    "@types/inquirer": "^9.0.3",
+    "@types/node": "^18.11.15",
+    "@types/shelljs": "^0.8.11",
+    "@typescript-eslint/eslint-plugin": "^5.46.1",
+    "@typescript-eslint/parser": "^5.46.1",
+    "cz-conventional-changelog": "^3.3.0",
+    "esbuild": "^0.15.16",
+    "eslint": "^8.29.0",
+    "eslint-config-prettier": "^8.5.0",
+    "path": "^0.12.7",
+    "prettier": "^2.8.1",
+    "typescript": "^4.9.4"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "dependencies": {
+    "chalk": "^4.0.0",
+    "ejs": "^3.1.8",
+    "inquirer": "^8.0.0",
+    "shelljs": "^0.8.5"
+  }
+}
