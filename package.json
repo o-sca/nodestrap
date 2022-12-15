@@ -1,14 +1,22 @@
 {
   "name": "@o-sca/nodestrap",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "bootstrap javascript/typescript project template generator",
   "main": "dist/index.js",
+  "typings": "dist/index",
   "bin": {
     "nodestrap": "dist/index.js"
   },
   "scripts": {
-    "start": "ts-node bin/index.ts",
-    "build": "tsc"
+    "start": "ts-node src/index.ts",
+    "prepublishOnly": "npm run clean && tsc -p .",
+    "compile": "npm run clean && tsc -p .",
+    "watch": "tsc -w -p .",
+    "clean": "rm -rf dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/o-sca/nodestrap.git"
   },
   "keywords": [],
   "author": "Oscar Yang Guang Zhu <ozhu35@gmail.com>",
@@ -39,5 +47,9 @@
     "ejs": "^3.1.8",
     "inquirer": "^8.0.0",
     "shelljs": "^0.8.5"
-  }
+  },
+  "files": [
+    "dist",
+    "templates"
+  ]
 }
