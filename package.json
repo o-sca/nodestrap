@@ -3,8 +3,12 @@
   "version": "1.0.0",
   "description": "bootstrap javascript/typescript project template generator",
   "main": "dist/index.js",
+  "bin": {
+    "nodestrap": "dist/index.js"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "ts-node bin/index.ts",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "Oscar Yang Guang Zhu <ozhu35@gmail.com>",
@@ -30,6 +34,7 @@
     }
   },
   "dependencies": {
+    "arg": "^5.0.2",
     "chalk": "^4.0.0",
     "ejs": "^3.1.8",
     "inquirer": "^8.0.0",
