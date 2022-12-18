@@ -8,6 +8,7 @@
     "nodestrap": "dist/index.js"
   },
   "scripts": {
+    "test": "npm run compile && ts-node test/index.ts",
     "start": "ts-node src/index.ts",
     "prepublishOnly": "npm run clean && tsc -p .",
     "compile": "npm run clean && tsc -p .",
@@ -22,12 +23,14 @@
   "author": "Oscar Yang Guang Zhu <ozhu35@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "@types/chai": "^4.3.4",
     "@types/ejs": "^3.1.1",
     "@types/inquirer": "^9.0.3",
     "@types/node": "^18.11.15",
     "@types/shelljs": "^0.8.11",
     "@typescript-eslint/eslint-plugin": "^5.46.1",
     "@typescript-eslint/parser": "^5.46.1",
+    "chai": "^4.3.7",
     "cz-conventional-changelog": "^3.3.0",
     "esbuild": "^0.15.16",
     "eslint": "^8.29.0",
