@@ -1,66 +1,55 @@
-import fs from "node:fs";
-import path from "node:path";
-import inquirer, { PromptModule } from "inquirer";
-import { Manager, Answers, Options, Lang } from "./types";
-import { postProcess, createProject, createDirContents } from "./functions";
 import chalk from "chalk";
+import path from "node:path";
+import inquirer, { PromptModule, Question } from "inquirer";
+import { NSAnswers, Options } from "./types";
+import { installDeps, execGitInit, createProject, createDirContents } from "./functions";
 
 const CURR_DIR = process.cwd();
 
-const ENV_CHOICES = fs.readdirSync(path.join(__dirname, '..', 'templates')) as Lang[];
-const PKG_CHOICES = [Manager.npm, Manager.pnpm, Manager.yarn];
-
-const QUESTIONS = [
-  {
-    name: 'templateChoice',
-    type: 'list',
-    message: 'select project environment',
-    choices: ENV_CHOICES,
-  },
-  {
-    name: 'projectName',
-    type: 'input',
-    message: 'input project name',
-    validate: (input: string) => {
-      //eslint-disable-next-line
-      if (/^([A-Za-z\-\_\d])+$/.test(input)) return true;
-      else return 'Project name may only include letters, numbers, underscores and hashes.';
-    }
-  },
-  {
-    name: 'authorName',
-    type: 'input',
-    message: 'input author name'
-  },
-  {
-    name: 'packageManager',
-    type: 'list',
-    message: 'select package manager',
-    choices: PKG_CHOICES
-  }
-];
-
-const prompt: PromptModule = inquirer.createPromptModule();
-
+/**
+* Prints the success message.
+* @param {Options} options
+*/
 function successLog(options: Options): void {
+  const optionsCopy = {
+    projectName: options.projectName,
+    authorName: options.authorName,
+    templateChoice: options.templateChoice,
+    targetPath: options.targetPath,
+    packageManager: options.packageManager,
+    gitInit: options.gitInit
+  };
+
   console.log(chalk.greenBright(`⚡Project successfully generated!\n`));
-  console.dir(options);
+  console.dir(optionsCopy);
+}
+
+/**
+* Throws an Error object with the error message string.
+* @param {string} error
+*/
+function errorLog(error: string): void {
+  throw new Error(error);
 }
 
 /**
  * Main driver.
  */
-function nodestrap(): void {
-  prompt(QUESTIONS)
-    .then((answers: Answers) => {
-      const templateChoice = answers["templateChoice"];
-      const projectName = answers["projectName"];
-      const authorName = answers["authorName"];
-      const templatePath = path.join(__dirname, '..', 'templates', templateChoice);
+function nodestrap(options: Options, questions: Question<NSAnswers>[]): void {
+  const prompt: PromptModule = inquirer.createPromptModule();
+  prompt(questions)
+    .then((answers: NSAnswers) => {
+      const templateChoice = answers["templateChoice"] || options.templateChoice;
+      const projectName = answers["projectName"] || options.projectName;
+      const authorName = answers["authorName"] || options.authorName;
+      const templatePath = path.join(__dirname, '../..', 'templates', templateChoice);
       const targetPath = path.join(CURR_DIR, projectName);
-      const packageManager = answers.packageManager;
+      const gitInit = answers["gitInit"] || options.gitInit;
+      const packageManager = answers.packageManager || options.packageManager;
 
-      const options: Options = {
+      const finalOptions: Options = {
+        skipPrompt: options.skipPrompt,
+        gitInit: gitInit,
         projectName: projectName,
         authorName: authorName,
         templateChoice: templateChoice,
@@ -71,11 +60,11 @@ function nodestrap(): void {
 
       console.log(chalk.yellowBright(`Generating project...`));
 
-      if (!createProject(targetPath)) return;
+      if (!createProject(targetPath)) return errorLog("Failed to create new project");
       createDirContents(templatePath, projectName, authorName, CURR_DIR);
-      postProcess(options)
-
-      successLog(options);
+      if (!installDeps(finalOptions)) return errorLog("Failed to install dependencies");
+      if (!execGitInit(finalOptions)) return errorLog("Failed to execute `git init`");
+      successLog(finalOptions);
     })
 
     .catch((err: Error) => {

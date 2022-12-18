@@ -9,7 +9,7 @@ import { Manager, Options } from "../types";
  * @param {Options} options
  * @returns {boolean} true if package.json exists else false
  */
-export function postProcess(options: Options): boolean {
+export function installDeps(options: Options): boolean {
   const isNode: boolean = fs.existsSync(path.join(options.templatePath, 'package.json'));
 
   if (isNode) {
@@ -33,4 +33,17 @@ export function postProcess(options: Options): boolean {
     }
   }
   return false;
+}
+
+/**
+ * Executes the git init command in the targetPath.
+ * @returns {boolean} if execution was successful else false
+ */
+export function execGitInit(options: Options): boolean {
+  if (options.gitInit) {
+    shell.cd(options.targetPath);
+    const result: ShellString = shell.exec('git init')
+    return result.code === 0;
+  }
+  return true;
 }

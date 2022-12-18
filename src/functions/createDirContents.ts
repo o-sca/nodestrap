@@ -22,7 +22,6 @@ export function createDirContents(
     const origFilePath = `${templatePath}/${file}`;
 
     const stats: fs.Stats = fs.statSync(origFilePath);
-
     if (stats.isFile()) {
       let contents: string = fs.readFileSync(origFilePath, 'utf-8');
       contents = ejs.render(contents, { projectName, authorName });
