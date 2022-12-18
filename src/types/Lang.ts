@@ -1,4 +1,5 @@
 export enum Lang {
   javascript = 'javascript',
-  typescript = 'typescript'
-};
+  typescript = 'typescript',
+  default = ''
+}

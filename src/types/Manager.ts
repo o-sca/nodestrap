@@ -1,5 +1,6 @@
 export enum Manager {
   npm = 'npm',
   pnpm = 'pnpm',
-  yarn = 'yarn'
+  yarn = 'yarn',
+  default = ''
 }
