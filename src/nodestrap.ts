@@ -10,7 +10,7 @@ const CURR_DIR = process.cwd();
 * Prints the success message.
 * @param {Options} options
 */
-function successLog(options: Options): void {
+function successLog(options: Options): boolean {
   const optionsCopy = {
     projectName: options.projectName,
     authorName: options.authorName,
@@ -22,55 +22,47 @@ function successLog(options: Options): void {
 
   console.log(chalk.greenBright(`⚡Project successfully generated!\n`));
   console.dir(optionsCopy);
+  return true;
 }
 
-/**
-* Throws an Error object with the error message string.
-* @param {string} error
-*/
-function errorLog(error: string): void {
-  throw new Error(error);
+function errorLog(error: string): boolean {
+  console.error(error);
+  return false;
 }
 
 /**
  * Main driver.
  */
-function nodestrap(options: Options, questions: Question<NSAnswers>[]): void {
+async function nodestrap(options: Options, questions: Question<NSAnswers>[]): Promise<boolean> {
   const prompt: PromptModule = inquirer.createPromptModule();
-  prompt(questions)
-    .then((answers: NSAnswers) => {
-      const templateChoice = answers["templateChoice"] || options.templateChoice;
-      const projectName = answers["projectName"] || options.projectName;
-      const authorName = answers["authorName"] || options.authorName;
-      const templatePath = path.join(__dirname, '../..', 'templates', templateChoice);
-      const targetPath = path.join(CURR_DIR, projectName);
-      const gitInit = answers["gitInit"] || options.gitInit;
-      const packageManager = answers.packageManager || options.packageManager;
+  const answers = await prompt(questions);
 
-      const finalOptions: Options = {
-        skipPrompt: options.skipPrompt,
-        gitInit: gitInit,
-        projectName: projectName,
-        authorName: authorName,
-        templateChoice: templateChoice,
-        templatePath: templatePath,
-        targetPath: targetPath,
-        packageManager: packageManager
-      };
+  const templateChoice = answers["templateChoice"] || options.templateChoice;
+  const projectName = answers["projectName"] || options.projectName;
+  const authorName = answers["authorName"] || options.authorName;
+  const templatePath = path.join(__dirname, '..', 'templates', templateChoice);
+  const targetPath = path.join(CURR_DIR, projectName);
+  const gitInit = answers["gitInit"] || options.gitInit;
+  const packageManager = answers.packageManager || options.packageManager;
 
-      console.log(chalk.yellowBright(`Generating project...`));
+  const finalOptions: Options = {
+    skipPrompt: options.skipPrompt,
+    gitInit: gitInit,
+    projectName: projectName,
+    authorName: authorName,
+    templateChoice: templateChoice,
+    templatePath: templatePath,
+    targetPath: targetPath,
+    packageManager: packageManager
+  };
 
-      if (!createProject(targetPath)) return errorLog("Failed to create new project");
-      createDirContents(templatePath, projectName, authorName, CURR_DIR);
-      if (!installDeps(finalOptions)) return errorLog("Failed to install dependencies");
-      if (!execGitInit(finalOptions)) return errorLog("Failed to execute `git init`");
-      successLog(finalOptions);
-    })
+  console.log(chalk.yellowBright(`Generating project...`));
 
-    .catch((err: Error) => {
-      console.error(err);
-      return;
-    });
+  if (!createProject(targetPath)) return errorLog("Failed to create new project");
+  createDirContents(templatePath, projectName, authorName, CURR_DIR);
+  if (!installDeps(finalOptions)) return errorLog("Failed to install dependencies");
+  if (!execGitInit(finalOptions)) return errorLog("Failed to execute `git init`");
+  return successLog(finalOptions);
 }
 
 export default nodestrap;
