@@ -17,6 +17,6 @@
     "noEmitOnError": true,
     "newLine": "lf",
   },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+  "include": ["src", "test"],
+  "exclude": ["node_modules", "dist"]
 }
