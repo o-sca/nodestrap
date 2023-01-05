@@ -4,11 +4,11 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "start": "ts-node src/index.ts",
+    "start": "ts-node -r tsconfig-paths/register src/index.ts",
     "compile": "npm run clean && npm test && tsc -p .",
-    "clean": "rm -rf src/**.{js,d.ts}",
+    "clean": "find dist/ -iname \"*.js\" -type f -delete && find dist/ -iname \"*.d.ts\" -type f -delete",
     "watch": "tsc -w -p .",
-    "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'test/**/*.ts'"
+    "test": "env ts_node_compiler_options='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'test/**/*.ts'"
   },
   "keywords": [],
   "author": "<%= authorName %>",
