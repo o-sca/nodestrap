@@ -1,6 +1,7 @@
-import { version } from "../package.json";
 import https from "node:https";
 import { IncomingMessage } from "node:http";
+
+const version = "1.0.7";
 
 type NpmBody = {
   "dist-tags": {
