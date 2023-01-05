@@ -27,6 +27,8 @@ export function installDeps(options: Options): boolean {
       case Manager.yarn:
         result = shell.exec('yarn install');
         return result.code === 0;
+      case Manager.default:
+        return true;
       default:
         // This shouldn't happen. xD
         return false;

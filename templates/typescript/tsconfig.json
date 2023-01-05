@@ -2,7 +2,9 @@
   "compilerOptions": {
     "target": "es2022",
     "module": "commonjs", /* For pkg npm build compatibility. */
+    "rootDir": "src"
     "outDir": "dist/",
+    "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -17,6 +19,6 @@
     "noEmitOnError": true,
     "newLine": "lf",
   },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+  "include": ["src", "test"],
+  "exclude": ["node_modules", "dist"]
 }

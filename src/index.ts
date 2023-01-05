@@ -21,5 +21,5 @@ checkAndRun()
     const parsedArgs = parseArgs(process.argv);
     const filledOptions = initOptions(options, parsedArgs);
     const questionsLeft = checkMissingPrompts(filledOptions);
-    nodestrap(filledOptions, questionsLeft);
+    nodestrap(filledOptions, questionsLeft).catch(console.error);
   });
