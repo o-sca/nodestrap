@@ -19,14 +19,13 @@ function successLog(options: Options): boolean {
     packageManager: options.packageManager,
     gitInit: options.gitInit
   };
-
   console.log(chalk.greenBright(`⚡Project successfully generated!\n`));
   console.dir(optionsCopy);
   return true;
 }
 
 function errorLog(error: string): boolean {
-  console.error(error);
+  console.error(chalk.redBright(error));
   return false;
 }
 

@@ -6,6 +6,6 @@ export type NSAnswers = {
   projectName: string;
   authorName: string;
   gitInit: boolean;
-  packageManager?: Manager;
+  packageManager: Manager;
 };
 

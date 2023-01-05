@@ -1,4 +1,3 @@
-import chalk from "chalk";
 import fs from "node:fs";
 
 /**
@@ -7,10 +6,7 @@ import fs from "node:fs";
  * @returns {boolean} true if successfully created else false
  */
 export function createProject(projectPath: string): boolean {
-  if (fs.existsSync(projectPath)) {
-    console.error(chalk.redBright(`Folder Path: ${projectPath} exists.`));
-    return false;
-  }
+  if (fs.existsSync(projectPath)) return false;
   fs.mkdirSync(projectPath);
   return true;
 }
