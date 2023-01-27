@@ -1,6 +1,6 @@
 {
   "name": "@o-sca/nodestrap",
-  "version": "1.0.6",
+  "version": "1.0.8",
   "description": "bootstrap javascript/typescript project template generator",
   "main": "dist/index.js",
   "typings": "dist/index",
