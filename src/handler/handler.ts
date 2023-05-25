@@ -23,6 +23,6 @@ export class BaseHandler implements Handler {
     if (this._next) {
       return this._next.handle(request);
     }
-    return null;
+    return request;
   }
 }
