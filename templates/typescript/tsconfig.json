@@ -1,24 +1,21 @@
 {
   "compilerOptions": {
-    "target": "es2022",
-    "module": "commonjs", /* For pkg npm build compatibility. */
-    "rootDir": "src"
-    "outDir": "dist/",
-    "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
+    "target": "es2017",
+    "module": "commonjs", 
+    "rootDir": "src",
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "sourceMap": true,
     "declaration": true,
-    "noImplicitReturns": true,
-		"noImplicitOverride": true,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"noUncheckedIndexedAccess": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "noEmitOnError": true,
-    "newLine": "lf",
+    "removeComments": true,
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "strictBindCallApply": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
   },
-  "include": ["src", "test"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules", "**/*.js"]
 }

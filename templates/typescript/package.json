@@ -6,7 +6,7 @@
   "scripts": {
     "start": "ts-node -r tsconfig-paths/register src/index.ts",
     "compile": "npm run clean && npm test && tsc -p .",
-    "clean": "find dist/ -iname \"*.js\" -type f -delete && find dist/ -iname \"*.d.ts\" -type f -delete",
+    "clean": "rm -rf dist",
     "watch": "tsc -w -p .",
     "test": "env ts_node_compiler_options='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'test/**/*.ts'"
   },

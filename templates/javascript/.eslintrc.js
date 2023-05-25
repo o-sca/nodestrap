@@ -3,9 +3,9 @@ module.exports = {
     "commonjs": true,
     "node": true
   },
-  "extends": "eslint:recommended",
-  "overrides": [
-  ],
+  "extends": ["eslint:recommended", "prettier"],
+  "plugins": ["prettier"],
+  "overrides": [],
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module"
