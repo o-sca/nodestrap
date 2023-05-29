@@ -2,7 +2,6 @@
   "compilerOptions": {
     "target": "es2017",
     "module": "commonjs",
-    "rootDir": "src",
     "outDir": "./dist",
     "baseUrl": "./",
     "sourceMap": true,
@@ -16,7 +15,5 @@
     "strictBindCallApply": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true
-  },
-  "include": ["**/*.ts"],
-  "exclude": ["node_modules", "**/*.js"]
+  }
 }
