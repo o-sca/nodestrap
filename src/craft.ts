@@ -40,7 +40,11 @@ export class Craft {
       const stats = await fs.stat(origFilePath);
       if (stats.isFile()) {
         let contents: string = await fs.readFile(origFilePath, 'utf-8');
-        contents = ejs.render(contents, { projectName, authorName });
+        contents = await ejs.render(
+          contents,
+          { projectName, authorName },
+          { async: true }
+        );
         const writePath: string = path.join(currDir, projectName, files[i]);
 
         await fs.writeFile(writePath, contents, 'utf-8');
