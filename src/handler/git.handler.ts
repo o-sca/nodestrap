@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import shell from 'shelljs';
-import { BaseHandler } from './handler';
+import { BaseHandler } from './handler.js';
 
 export class GitHandler extends BaseHandler {
   public handle(request: {

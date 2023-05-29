@@ -1,5 +1,5 @@
 import path from 'node:path';
-import { BaseHandler } from './handler';
+import { BaseHandler } from './handler.js';
 
 export class TemplateHandler extends BaseHandler {
   public handle(request: {

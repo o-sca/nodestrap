@@ -2,14 +2,17 @@
   "name": "@o-sca/nodestrap",
   "version": "1.0.8",
   "description": "bootstrap javascript/typescript project template generator",
-  "main": "dist/index.js",
-  "typings": "dist/index",
+  "type": "module",
+  "exports": "dist/index.js",
+  "engines": {
+    "node": ">=16"
+  },
   "bin": {
     "nodestrap": "dist/index.js"
   },
   "scripts": {
     "test": "jest --passWithNoTests",
-    "start:dev": "ts-node src/index.ts",
+    "start:dev": "ts-node --esm src/index.ts",
     "start:prod": "node dist",
     "prepublishOnly": "npm run clean && tsc -p .",
     "build:win32": "rmdir /s dist && npm test && tsc -p .",
@@ -27,7 +30,9 @@
     "@inquirer/prompts": "^1.2.3",
     "arg": "^5.0.2",
     "chalk": "4.0.0",
+    "cli-spinners": "^2.9.0",
     "ejs": "^3.1.8",
+    "ora": "^6.3.1",
     "shelljs": "^0.8.5"
   },
   "devDependencies": {
@@ -75,6 +80,11 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "ts-node": {
+    "transpileOnly": true,
+    "files": true,
+    "experimentalResolver": true
   },
   "files": [
     "dist",

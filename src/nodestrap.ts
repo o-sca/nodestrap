@@ -4,7 +4,7 @@ import {
   GitHandler,
   ProjectHandler,
   TemplateHandler,
-} from './handler';
+} from './handler.js';
 
 export class Nodestrap {
   async launch() {
