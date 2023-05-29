@@ -1,27 +1,29 @@
-import fs from 'node:fs';
-import path from 'node:path';
+import fs from 'node:fs/promises';
+import path, { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import shell from 'shelljs';
 import { BaseHandler } from './handler.js';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 export class GitHandler extends BaseHandler {
-  public handle(request: {
-    [key: string]: boolean | string;
-  }): { [key: string]: string | boolean } | null {
-    if (request['git']) {
+  public async handle(request: { [key: string]: boolean | string }) {
+    if (request['_git']) {
       const projectPath = request['project'] as string;
       shell.cd(projectPath);
       shell.exec('git init');
-      this.createGitignore(projectPath);
-      return super.handle(request);
+      await this.createGitignore(projectPath);
+      return await super.handle(request);
     }
     return request;
   }
 
-  private createGitignore(projectPath: string) {
-    const gitignoreFile = fs.readFileSync(
+  private async createGitignore(projectPath: string) {
+    const gitignoreFile = await fs.readFile(
       path.join(__dirname, '..', '..', 'templates', 'typescript', '.gitignore'),
       'utf-8'
     );
-    fs.writeFileSync(`${projectPath}/.gitignore`, gitignoreFile);
+    await fs.writeFile(`${projectPath}/.gitignore`, gitignoreFile);
   }
 }

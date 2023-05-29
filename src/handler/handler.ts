@@ -1,13 +1,9 @@
-import { select, confirm, input } from '@inquirer/prompts';
-
 interface Handler {
   setNext(h: Handler): Handler;
   handle(request: {
     [key: string]: string | boolean;
-  }): { [key: string]: string | boolean } | null;
+  }): Promise<{ [key: string]: string | boolean } | null>;
 }
-
-export type Prompts = typeof select | typeof confirm | typeof input;
 
 export class BaseHandler implements Handler {
   private _next: Handler;
@@ -17,9 +13,9 @@ export class BaseHandler implements Handler {
     return handler;
   }
 
-  public handle(request: {
+  public async handle(request: {
     [key: string]: string | boolean;
-  }): { [key: string]: string | boolean } | null {
+  }): Promise<{ [key: string]: string | boolean } | null> {
     if (this._next) {
       return this._next.handle(request);
     }

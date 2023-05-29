@@ -1,11 +1,10 @@
 import path from 'node:path';
-import chalk from 'chalk';
 import { BaseHandler } from './handler.js';
 import { Craft } from '../craft.js';
 
 export class ProjectHandler extends BaseHandler {
   private readonly CURR_DIR = process.cwd();
-  public handle(request: { [key: string]: string | boolean }) {
+  public async handle(request: { [key: string]: string | boolean }) {
     if (request['project'] !== undefined) {
       const authorName = request['author'] as string;
       const templatePath = request['template'] as string;
@@ -14,12 +13,10 @@ export class ProjectHandler extends BaseHandler {
 
       request['project'] = newProjectPath;
 
-      console.log(chalk.yellowBright(`Generating project...`));
-      const createdProjectPath = Craft.project(newProjectPath);
-      if (!createdProjectPath) throw new Error('Failed to create new project');
-      Craft.dir(templatePath, projectName, authorName, this.CURR_DIR);
+      await Craft.project(newProjectPath);
+      await Craft.dir(templatePath, projectName, authorName, this.CURR_DIR);
 
-      return super.handle(request);
+      return await super.handle(request);
     }
     return request;
   }

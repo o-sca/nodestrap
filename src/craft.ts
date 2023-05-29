@@ -1,4 +1,4 @@
-import fs from 'node:fs';
+import fs from 'node:fs/promises';
 import path from 'node:path';
 import ejs from 'ejs';
 
@@ -6,12 +6,16 @@ export class Craft {
   /**
    * Creates root folder labeled with the given projectName at the targeted path.
    * @param {string} path
-   * @returns {boolean} true if successfully created else false
+   * @returns {boolean} true if dir does not exist yet
    */
-  public static project(path: string): boolean {
-    if (fs.existsSync(path)) return false;
-    fs.mkdirSync(path);
-    return true;
+  public static async project(path: string): Promise<boolean> {
+    try {
+      await fs.stat(path);
+      return true;
+    } catch (err) {
+      await fs.mkdir(path);
+      return true;
+    }
   }
 
   /**
@@ -22,33 +26,33 @@ export class Craft {
    * @param {string} authorName
    * @param {string} currDir
    */
-  public static dir(
+  public static async dir(
     templatePath: string,
     projectName: string,
     authorName: string,
     currDir: string
-  ) {
-    const filesToCreate: string[] = fs.readdirSync(templatePath);
+  ): Promise<void> {
+    const files: string[] = await fs.readdir(templatePath);
 
-    filesToCreate.forEach((file: string) => {
-      const origFilePath = `${templatePath}/${file}`;
+    for (let i = 0; i < files.length; i++) {
+      const origFilePath = `${templatePath}/${files[i]}`;
 
-      const stats: fs.Stats = fs.statSync(origFilePath);
+      const stats = await fs.stat(origFilePath);
       if (stats.isFile()) {
-        let contents: string = fs.readFileSync(origFilePath, 'utf-8');
+        let contents: string = await fs.readFile(origFilePath, 'utf-8');
         contents = ejs.render(contents, { projectName, authorName });
-        const writePath: string = path.join(currDir, projectName, file);
+        const writePath: string = path.join(currDir, projectName, files[i]);
 
-        fs.writeFileSync(writePath, contents, 'utf-8');
+        await fs.writeFile(writePath, contents, 'utf-8');
       } else if (stats.isDirectory()) {
-        fs.mkdirSync(path.join(currDir, projectName, file));
+        await fs.mkdir(path.join(currDir, projectName, files[i]));
         this.dir(
-          path.join(templatePath, file),
-          path.join(projectName, file),
+          path.join(templatePath, files[i]),
+          path.join(projectName, files[i]),
           authorName,
           currDir
         );
       }
-    });
+    }
   }
 }

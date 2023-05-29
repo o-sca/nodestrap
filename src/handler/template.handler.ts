@@ -1,10 +1,12 @@
-import path from 'node:path';
+import path, { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { BaseHandler } from './handler.js';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 export class TemplateHandler extends BaseHandler {
-  public handle(request: {
-    [key: string]: string | boolean;
-  }): { [key: string]: string | boolean } | null {
+  public async handle(request: { [key: string]: string | boolean }) {
     if (request['template'] !== undefined) {
       const template = request['template'] as string;
       request['template'] = path.join(
@@ -13,7 +15,7 @@ export class TemplateHandler extends BaseHandler {
         'templates',
         template
       );
-      return super.handle(request);
+      return await super.handle(request);
     }
     return request;
   }
