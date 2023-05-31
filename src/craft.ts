@@ -50,7 +50,7 @@ export class Craft {
         await fs.writeFile(writePath, contents, 'utf-8');
       } else if (stats.isDirectory()) {
         await fs.mkdir(path.join(currDir, projectName, files[i]));
-        this.dir(
+        await this.dir(
           path.join(templatePath, files[i]),
           path.join(projectName, files[i]),
           authorName,
