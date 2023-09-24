@@ -8,10 +8,6 @@ import {
 } from './handler';
 
 export class Nodestrap {
-  public constructor() {
-    console.log(chalk.yellowBright(`Generating project`));
-  }
-
   async launch() {
     const options = await this.prompt();
 
@@ -25,6 +21,7 @@ export class Nodestrap {
       .setNext(dependencyHandler)
       .setNext(gitHandler);
 
+    console.log(chalk.yellowBright(`Generating project`));
     const result = await templateHandler.handle(options);
     console.log(chalk.greenBright(`Project generated!`));
     console.log(result);
