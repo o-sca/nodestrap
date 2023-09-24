@@ -6,8 +6,8 @@
   "scripts": {
     "start:dev": "ts-node -r tsconfig-paths/register src/index.ts",
     "start:prod": "node dist",
-    "build:win32": "rmdir /s dist && npm test && tsc -p .",
-    "build:darwin": "rm -rf && npm test && tsc",
+    "build:win32": "rmdir -Force -Recurse dist && npm test && tsc -p .",
+    "build:darwin": "rm -rf dist && npm test && tsc",
     "watch": "tsc -w -p .",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
