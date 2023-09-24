@@ -1,11 +1,7 @@
 import fs from 'node:fs/promises';
 import https from 'node:https';
-import path, { dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import path from 'node:path';
 import { IncomingMessage } from 'node:http';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 export class Updater {
   public async fetch(): Promise<void> {

@@ -1,21 +1,15 @@
 import { select, confirm, input } from '@inquirer/prompts';
-import ora, { Ora } from 'ora';
 import chalk from 'chalk';
 import {
   DependencyHandler,
   GitHandler,
   ProjectHandler,
   TemplateHandler,
-} from './handler/index.js';
+} from './handler';
 
 export class Nodestrap {
-  private _spinner: Ora;
-
   public constructor() {
-    this._spinner = ora({
-      spinner: 'dots',
-      text: chalk.yellowBright(`Generating project`),
-    });
+    console.log(chalk.yellowBright(`Generating project`));
   }
 
   async launch() {
@@ -31,10 +25,8 @@ export class Nodestrap {
       .setNext(dependencyHandler)
       .setNext(gitHandler);
 
-    this._spinner.start();
     const result = await templateHandler.handle(options);
-    this._spinner.succeed(chalk.greenBright(`Project generated!`));
-    this._spinner.stop();
+    console.log(chalk.greenBright(`Project generated!`));
     console.log(result);
   }
 

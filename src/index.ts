@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-import { Nodestrap } from './nodestrap.js';
-import { Updater } from './updater.js';
+import { Nodestrap } from './nodestrap';
+import { Updater } from './updater';
 
 const updater = new Updater();
 const nodestrap = new Nodestrap();
