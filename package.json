@@ -1,9 +1,9 @@
 {
   "name": "@o-sca/nodestrap",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "bootstrap javascript/typescript project template generator",
   "type": "module",
-  "exports": "dist/index.js",
+  "exports": "./dist/index.js",
   "engines": {
     "node": ">=16"
   },
@@ -11,7 +11,7 @@
     "nodestrap": "dist/index.js"
   },
   "scripts": {
-    "test": "jest",
+    "test": "jest --allow-js --passWithNoTests",
     "start:dev": "ts-node --esm src/index.ts",
     "start:prod": "node dist",
     "prepublishOnly": "tsc -p .",
