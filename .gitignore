@@ -42,3 +42,5 @@ build/
 yarn.lock
 
 tsconfig.tsbuildinfo
+
+.eslintcache
