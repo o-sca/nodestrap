@@ -51,6 +51,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "lint-staged": "^15.0.2",
+    "manten": "^1.1.0",
     "path": "^0.12.7",
     "pkgroll": "^2.0.1",
     "prettier": "^2.8.1",
