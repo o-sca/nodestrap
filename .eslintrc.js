@@ -10,7 +10,9 @@ module.exports = {
     "node": true,
     "jest": true
   },
-  "ignorePatterns": [],
+  "ignorePatterns": [
+    "templates"
+  ],
   "extends": [
     "plugin:prettier/recommended",
     "plugin:@typescript-eslint/recommended"

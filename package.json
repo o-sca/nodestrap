@@ -1,22 +1,17 @@
 {
   "name": "@o-sca/nodestrap",
-  "version": "1.0.8",
+  "version": "1.1.0",
   "description": "bootstrap javascript/typescript project template generator",
-  "type": "module",
-  "exports": "dist/index.js",
-  "engines": {
-    "node": ">=16"
-  },
   "bin": {
     "nodestrap": "dist/index.js"
   },
   "scripts": {
-    "test": "jest",
-    "start:dev": "ts-node --esm src/index.ts",
+    "test": "jest --passWithNoTests",
+    "start:dev": "ts-node src/index.ts",
     "start:prod": "node dist",
     "prepublishOnly": "tsc -p .",
-    "build:win32": "rmdir /s dist && npm test && tsc -p .",
-    "build:darwin": "rm -rf && npm test && tsc",
+    "build:win32": "rmdir -Force -Recurse dist && npm test && tsc -p .",
+    "build:darwin": "rm -rf dist && npm test && tsc",
     "watch": "tsc -w -p ."
   },
   "repository": {
@@ -29,9 +24,8 @@
   "dependencies": {
     "@inquirer/prompts": "^1.2.3",
     "arg": "^5.0.2",
-    "chalk": "^5.2.0",
+    "chalk": "^4.0.0",
     "ejs": "^3.1.8",
-    "ora": "^6.3.1",
     "shelljs": "^0.8.5"
   },
   "devDependencies": {
