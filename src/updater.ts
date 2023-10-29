@@ -1,11 +1,8 @@
 import fs from 'node:fs/promises';
-import https from 'node:https';
-import path, { dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
 import { IncomingMessage } from 'node:http';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+import https from 'node:https';
+import path from 'node:path';
+import { cwd } from 'node:process';
 
 export class Updater {
   public async fetch(): Promise<void> {
@@ -25,7 +22,7 @@ export class Updater {
 
   private async getCurrentVersion(): Promise<string> {
     const packageJson = await fs.readFile(
-      path.join(__dirname, '..', 'package.json'),
+      path.join(cwd(), 'package.json'),
       'utf8'
     );
     return (JSON.parse(packageJson) as { version: string }).version;
