@@ -5,7 +5,7 @@ import {
   GitHandler,
   ProjectHandler,
   TemplateHandler,
-} from './handler';
+} from './handler/index.js';
 
 export class Nodestrap {
   async launch() {
@@ -18,13 +18,12 @@ export class Nodestrap {
 
     templateHandler
       .setNext(projectHandler)
-      .setNext(dependencyHandler)
-      .setNext(gitHandler);
+      .setNext(gitHandler)
+      .setNext(dependencyHandler);
 
     console.log(chalk.yellowBright(`Generating project`));
-    const result = await templateHandler.handle(options);
+    await templateHandler.handle(options);
     console.log(chalk.greenBright(`Project generated!`));
-    console.log(result);
   }
 
   private async prompt() {
