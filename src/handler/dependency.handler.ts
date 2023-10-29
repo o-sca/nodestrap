@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import shell from 'shelljs';
-import { BaseHandler } from './handler.js';
+import { BaseHandler } from './handler';
 
 export class DependencyHandler extends BaseHandler {
   public async handle(request: { [key: string]: string | boolean }) {

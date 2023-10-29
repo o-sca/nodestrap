@@ -1,9 +1,5 @@
-import path, { dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { BaseHandler } from './handler.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+import path from 'node:path';
+import { BaseHandler } from './handler';
 
 export class TemplateHandler extends BaseHandler {
   public async handle(request: { [key: string]: string | boolean }) {

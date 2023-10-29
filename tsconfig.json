@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "module": "commonjs",
+    "module": "CommonJS",
     "outDir": "./dist",
-    "resolveJsonModule": false,
+    "rootDir": "./src",
+    "baseUrl": "./",
     "sourceMap": true,
     "declaration": true,
     "removeComments": true,
