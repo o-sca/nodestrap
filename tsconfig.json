@@ -1,12 +1,11 @@
 {
   "compilerOptions": {
-    "target": "ES2019",
-    "module": "Node16",
+    "moduleResolution": "node",
+    "target": "ES2022",
+    "module": "ESNext",
     "removeComments": true,
     "skipLibCheck": true,
-    "strictNullChecks": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
+    "esModuleInterop": true
   },
   "exclude": ["node_modules", "tests", "dist", "templates", "**/*spec.ts"]
 }
