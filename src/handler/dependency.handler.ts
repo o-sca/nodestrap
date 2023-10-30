@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import shell from 'shelljs';
+import { execSync } from 'node:child_process';
 import { BaseHandler } from './handler.js';
 
 export class DependencyHandler extends BaseHandler {
@@ -11,17 +11,15 @@ export class DependencyHandler extends BaseHandler {
 
       await fs.access(path.join(projectPath, 'package.json'));
 
-      shell.cd(projectPath);
-
       switch (packageManager) {
         case 'npm':
-          shell.exec('npm install');
+          execSync('npm install', { cwd: projectPath });
           break;
         case 'pnpm':
-          shell.exec('pnpm install');
+          execSync('pnpm install', { cwd: projectPath });
           break;
         case 'yarn':
-          shell.exec('yarn install');
+          execSync('yarn install', { cwd: projectPath });
           break;
         default:
           break;

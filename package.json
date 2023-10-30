@@ -38,8 +38,7 @@
     "@types/shelljs": "^0.8.11",
     "arg": "^5.0.2",
     "chalk": "^4.0.0",
-    "ejs": "^3.1.8",
-    "shelljs": "^0.8.5"
+    "ejs": "^3.1.8"
   },
   "devDependencies": {
     "@types/inquirer": "^9.0.3",
@@ -52,7 +51,6 @@
     "eslint-plugin-prettier": "^4.2.1",
     "lint-staged": "^15.0.2",
     "manten": "^1.1.0",
-    "path": "^0.12.7",
     "pkgroll": "^2.0.1",
     "prettier": "^2.8.1",
     "simple-git-hooks": "^2.9.0",

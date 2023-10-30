@@ -1,16 +1,15 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { cwd } from 'node:process';
-import shell from 'shelljs';
+import { execSync } from 'node:child_process';
 import { BaseHandler } from './handler.js';
 
 export class GitHandler extends BaseHandler {
   public async handle(request: { [key: string]: boolean | string }) {
-    if (request['_git']) {
+    if (request['git']) {
       const projectPath = request['project'] as string;
-      shell.cd(projectPath);
-      shell.exec('git init');
       await this.createGitignore(projectPath);
+      execSync(`git init`, { cwd: projectPath });
       return await super.handle(request);
     }
     return request;
