@@ -2,18 +2,10 @@
   "compilerOptions": {
     "target": "es2017",
     "module": "commonjs",
-    "outDir": "./dist",
-    "baseUrl": "./",
-    "sourceMap": true,
-    "declaration": true,
     "removeComments": true,
-    "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": true,
     "esModuleInterop": true,
-    "noImplicitAny": true,
-    "strictBindCallApply": true,
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true
+    "allowSyntheticDefaultImports": true
   }
 }

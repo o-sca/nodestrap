@@ -9,7 +9,7 @@ module.exports = {
   env: {
     node: true,
   },
-  ignorePatterns: ['templates', 'tests'],
+  ignorePatterns: ['templates/**/*', 'tests', '.eslintrc.*'],
   extends: ['prettier', 'plugin:@typescript-eslint/recommended'],
   overrides: [],
   plugins: ['@typescript-eslint/eslint-plugin'],
