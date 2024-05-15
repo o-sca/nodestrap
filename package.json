@@ -9,28 +9,19 @@
     "keywords": [],
     "author": "Oscar Yang Guang Zhu <ozhu35@gmail.com>",
     "license": "MIT",
-    "type": "module",
     "main": "./dist/index.cjs",
-    "module": "./dist/index.mjs",
-    "types": "./dist/index.d.cts",
-    "exports": {
-        "require": {
-            "types": "./dist/index.d.cts",
-            "default": "./dist/index.cjs"
-        },
-        "import": {
-            "types": "./dist/index.d.mts",
-            "default": "./dist/index.mjs"
-        }
-    },
     "bin": {
         "nodestrap": "./dist/index.js"
     },
     "scripts": {
-        "build": "pkgroll --minify",
+        "start": "node dist/index.js",
+        "dev": "tsx src/index.ts",
+        "watch": "node esbuild.config.js --watch",
+        "build": "node esbuild.config.js",
+        "format": "prettier --write .",
+        "lint": "eslint --fix .",
         "test": "tsx tests/index.spec.ts",
-        "start": "tsx src/index.ts",
-        "prepare": "husky install"
+        "prepare": "husky install || true"
     },
     "dependencies": {
         "@inquirer/prompts": "^1.2.3",
@@ -43,24 +34,29 @@
     "devDependencies": {
         "@commitlint/cli": "^18.4.3",
         "@commitlint/config-conventional": "^18.4.3",
+        "@semantic-release/changelog": "^6.0.3",
+        "@semantic-release/commit-analyzer": "^11.1.0",
+        "@semantic-release/error": "^4.0.0",
         "@semantic-release/git": "^10.0.1",
         "@semantic-release/github": "^9.2.6",
+        "@semantic-release/npm": "^11.0.2",
+        "@semantic-release/release-notes-generator": "^12.1.0",
         "@types/inquirer": "^9.0.3",
         "@types/node": "^18.11.15",
         "@typescript-eslint/eslint-plugin": "^5.59.7",
         "@typescript-eslint/parser": "^5.59.7",
-        "esbuild": "^0.15.16",
+        "esbuild": "^0.20.2",
         "eslint": "^8.29.0",
         "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-prettier": "^4.2.1",
         "eslint-plugin-simple-import-sort": "^10.0.0",
+        "eslint-plugin-unused-imports": "^3.2.0",
+        "husky": "^8.0.0",
         "lint-staged": "^15.0.2",
         "manten": "^1.1.0",
-        "pkgroll": "^2.0.1",
         "prettier": "^2.8.1",
         "tsx": "^3.14.0",
-        "typescript": "^4.9.4",
-        "husky": "^8.0.0"
+        "typescript": "^4.9.4"
     },
     "files": [
         "dist",

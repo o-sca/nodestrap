@@ -6,6 +6,6 @@ const updater = new Updater();
 const nodestrap = new Nodestrap();
 
 (async () => {
-  await updater.fetch();
-  nodestrap.launch();
+	await updater.fetch();
+	nodestrap.launch();
 })();
