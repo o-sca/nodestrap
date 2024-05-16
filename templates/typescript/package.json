@@ -1,50 +1,48 @@
 {
   "name": "<%= projectName %>",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.cts",
-  "exports": {
-    "require": {
-      "types": "./dist/index.d.cts",
-      "default": "./dist/index.cjs"
-    },
-    "import": {
-      "types": "./dist/index.d.mts",
-      "default": "./dist/index.mjs"
-    }
-  },
+  "main": "dist/index.js",
   "scripts": {
-    "test": "tsx tests/**/*.ts",
-    "start": "tsx src/index.ts",
-    "build": "pkgroll --minify",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix"
+    "start": "node dist/index.js",
+    "dev": "node --env-file=.dev.env dist/index.js",
+    "watch": "node esbuild.config.js --watch",
+    "build": "node esbuild.config.js",
+    "format": "prettier --write .",
+    "lint": "eslint --fix .",
+    "test": "jest --passWithNoTests",
+    "test:watch": "jest --watch",
+    "prepare": "husky || true"
   },
   "keywords": [],
   "author": "<%= authorName %>",
-  "license": "MIT",
+  "license": "ISC",
   "dependencies": {},
   "devDependencies": {
-    "@types/node": "^18.11.15",
-    "@typescript-eslint/eslint-plugin": "^5.46.1",
-    "@typescript-eslint/parser": "^5.46.1",
-    "eslint": "^8.29.0",
+    "@commitlint/cli": "^18.4.3",
+    "@commitlint/config-conventional": "^18.4.3",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^11.1.0",
+    "@semantic-release/error": "^4.0.0",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^9.2.6",
+    "@semantic-release/npm": "^11.0.2",
+    "@semantic-release/release-notes-generator": "^12.1.0",
+    "@typescript-eslint/eslint-plugin": "^5.40.0",
+    "@typescript-eslint/parser": "^5.40.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "esbuild": "^0.20.2",
+    "eslint": "^8.25.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "lint-staged": "^15.0.2",
-    "manten": "^1.1.0",
-    "pkgroll": "^2.0.1",
-    "prettier": "^2.8.1",
-    "simple-git-hooks": "^2.9.0",
-    "typescript": "^4.9.4",
-    "tsx": "^3.14.0"
-  },
-  "simple-git-hooks": {
-    "pre-commit": "npx lint-staged"
-  },
-  "lint-staged": {
-    "*.{js,ts}": "eslint --cache"
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "eslint-plugin-unused-imports": "^3.2.0",
+    "husky": "^9.0.11",
+    "jest": "^29.7.0",
+    "lint-staged": "^15.1.0",
+    "prettier": "^2.7.1",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.1.2",
+    "typescript": "^4.8.4"
   }
 }
