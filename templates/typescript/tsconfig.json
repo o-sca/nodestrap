@@ -1,11 +1,17 @@
 {
   "compilerOptions": {
-    "target": "es2017",
-    "module": "commonjs",
-    "removeComments": true,
+    "target": "ES2022",
+    "module": "Node16",
+    "rootDir": "src",
+    "outDir": "dist/",
     "skipLibCheck": true,
-    "strictNullChecks": true,
+    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "declaration": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   }
 }

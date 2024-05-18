@@ -1,2 +1,1 @@
-const math = require("math")
-console.log("Hello World");
+console.log('hello world');

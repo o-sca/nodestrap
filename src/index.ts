@@ -4,5 +4,6 @@ import { Nodestrap } from './nodestrap.js';
 const nodestrap = new Nodestrap();
 
 (async () => {
-  nodestrap.launch();
+	await updater.fetch();
+	nodestrap.launch();
 })();
