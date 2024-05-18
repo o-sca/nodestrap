@@ -46,11 +46,18 @@ export class Craft {
 					{ projectName, authorName },
 					{ async: true }
 				);
-				const writePath: string = path.join(
-					currDir,
-					projectName,
-					files[i]
-				);
+
+				let writePath = '';
+
+				if (files[i].startsWith('_')) {
+					writePath = path.join(
+						currDir,
+						projectName,
+						`.${files[i].substring(1)}`
+					);
+				} else {
+					writePath = path.join(currDir, projectName, files[i]);
+				}
 
 				await fs.writeFile(writePath, contents, 'utf-8');
 			} else if (stats.isDirectory()) {

@@ -18,7 +18,7 @@ export class GitHandler extends BaseHandler {
 
 	private async createGitignore(projectPath: string) {
 		const gitignoreFile = await fs.readFile(
-			path.join(cwd(), 'templates', 'typescript', '.gitignore'),
+			path.join(cwd(), 'templates', 'typescript', '_gitignore'),
 			'utf-8'
 		);
 		await fs.writeFile(`${projectPath}/.gitignore`, gitignoreFile);
