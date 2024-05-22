@@ -1,3 +1,10 @@
+## [1.1.5](https://github.com/o-sca/nodestrap/compare/v1.1.4...v1.1.5) (2024-05-22)
+
+
+### Bug Fixes
+
+* **templates:** broken husky command on javascript template ([fd46fe2](https://github.com/o-sca/nodestrap/commit/fd46fe2838a58ba2f0a07523ee4483ba2d4940c7))
+
 ## [1.0.1](https://github.com/o-sca/nodestrap/compare/v1.0.0...v1.0.1) (2024-05-22)
 
 
