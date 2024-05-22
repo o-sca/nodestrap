@@ -1,4 +1,3 @@
-import { describe, expect, test } from 'manten';
 import { readdirSync, rmSync } from 'node:fs';
 import path from 'node:path';
 import {
@@ -6,7 +5,7 @@ import {
 	GitHandler,
 	ProjectHandler,
 	TemplateHandler,
-} from '../src/handler/index.js';
+} from '../src/handler';
 
 type NodestrapProjectResponse = {
 	template: string;
@@ -24,7 +23,10 @@ const inquirerOptionsForTS = {
 	packageManager: 'npm',
 };
 
-describe('Nodestrap Test', async () => {
+let result: NodestrapProjectResponse;
+let files: string[];
+
+beforeAll(async () => {
 	const projectHandler = new ProjectHandler();
 	const templateHandler = new TemplateHandler();
 	const dependencyHandler = new DependencyHandler();
@@ -35,19 +37,25 @@ describe('Nodestrap Test', async () => {
 		.setNext(gitHandler)
 		.setNext(dependencyHandler);
 
-	const result = (await templateHandler.handle(
+	result = (await templateHandler.handle(
 		inquirerOptionsForTS
 	)) as NodestrapProjectResponse;
 
-	const files = readdirSync(result.project);
+	files = readdirSync(result.project);
+});
 
+afterAll(() => {
+	rmSync(result.project, { recursive: true, force: true });
+});
+
+describe('Typescript Project', () => {
 	test('Correctly generated project', () => {
 		expect(result).toStrictEqual({
 			template: path.join(inquirerOptionsForTS.template),
 			project: path.join(inquirerOptionsForTS.project),
 			author: inquirerOptionsForTS.author,
-			git: inquirerOptionsForTS.git,
 			packageManager: inquirerOptionsForTS.packageManager,
+			git: inquirerOptionsForTS.git,
 		});
 	});
 
@@ -62,6 +70,4 @@ describe('Nodestrap Test', async () => {
 	test('Contains node_modules folder', () => {
 		expect(files).toContain('node_modules');
 	});
-
-	rmSync(result.project, { recursive: true, force: true });
 });
