@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/o-sca/nodestrap/compare/v1.0.0...v1.0.1) (2024-05-22)
+
+
+### Bug Fixes
+
+* **handler:** read the template variable to the path ([7b3d72c](https://github.com/o-sca/nodestrap/commit/7b3d72c43296c5968587f80aedf6f1fb493c8996))
+
 # 1.0.0 (2024-05-21)
 
 
