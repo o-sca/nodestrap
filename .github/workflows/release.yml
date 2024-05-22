@@ -1,35 +1,36 @@
 name: releases
 
 on:
-    push:
-        branches:
-            - main
+  push:
+    branches:
+      - main
 
 permissions:
-    contents: read
+  contents: read
 
 jobs:
-    release:
-        name: release
-        runs-on: ubuntu-20.04
-        permissions:
-            contents: write
-            issues: write
-            pull-requests: write
-            id-token: write
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v3
-              with:
-                  fetch-depth: 0
-            - name: Setup Node.js
-              uses: actions/setup-node@v3
-              with:
-                  node-version: lts/*
-            - name: Install Dependencies
-              run: npm install
-            - name: Release
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-              run: npx semantic-release
+  release:
+    name: release
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
+          registry-url: https://registry.npmjs.org/
+      - name: Install Dependencies
+        run: npm install
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release
