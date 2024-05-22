@@ -1,5 +1,6 @@
 import { readdirSync, rmSync } from 'node:fs';
 import path from 'node:path';
+import { cwd } from 'node:process';
 import {
 	DependencyHandler,
 	GitHandler,
@@ -27,6 +28,8 @@ let result: NodestrapProjectResponse;
 let files: string[];
 
 beforeAll(async () => {
+	rmSync(path.join(cwd(), 'ts-test'), { recursive: true, force: true });
+
 	const projectHandler = new ProjectHandler();
 	const templateHandler = new TemplateHandler();
 	const dependencyHandler = new DependencyHandler();
