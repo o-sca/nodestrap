@@ -1,7 +1,7 @@
 import path from 'node:path';
 
-import { Craft } from '../craft.js';
-import { BaseHandler } from './handler.js';
+import { Craft } from '../craft';
+import { BaseHandler } from './handler';
 
 export class ProjectHandler extends BaseHandler {
 	private readonly CURR_DIR = process.cwd();

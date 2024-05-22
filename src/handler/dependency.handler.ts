@@ -2,7 +2,7 @@ import { execSync } from 'node:child_process';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-import { BaseHandler } from './handler.js';
+import { BaseHandler } from './handler';
 
 export class DependencyHandler extends BaseHandler {
 	public async handle(request: { [key: string]: string | boolean }) {

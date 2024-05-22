@@ -3,7 +3,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { cwd } from 'node:process';
 
-import { BaseHandler } from './handler.js';
+import { BaseHandler } from './handler';
 
 export class GitHandler extends BaseHandler {
 	public async handle(request: { [key: string]: boolean | string }) {

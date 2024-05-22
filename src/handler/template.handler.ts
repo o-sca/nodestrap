@@ -1,7 +1,7 @@
 import path from 'node:path';
 import { cwd } from 'node:process';
 
-import { BaseHandler } from './handler.js';
+import { BaseHandler } from './handler';
 
 export class TemplateHandler extends BaseHandler {
 	public async handle(request: { [key: string]: string | boolean }) {
